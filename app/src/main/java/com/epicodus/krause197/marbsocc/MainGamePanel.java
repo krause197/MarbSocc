@@ -11,9 +11,12 @@ import android.view.SurfaceView;
  */
 public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
+    private MainThread thread;
+
     public MainGamePanel (Context context) {
         super(context);
         getHolder().addCallback(this);
+        thread = new MainThread(getHolder(), this);
         setFocusable(true);
     }
 
@@ -25,6 +28,8 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        thread.setRunning(true);
+        thread.start();
 
     }
 
@@ -35,6 +40,15 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
+        boolean retry = true;
+        while (retry) {
+            try {
+                thread.join();
+                retry = false;
+            } catch (InterruptedException e) {
+
+            }
+        }
 
     }
 
