@@ -2,6 +2,7 @@ package com.epicodus.krause197.marbsocc;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -70,6 +71,7 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     protected void onDraw(Canvas canvas) {
+        canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.ball), 10, 10, null);
 
     }
 }

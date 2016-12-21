@@ -1,5 +1,6 @@
 package com.epicodus.krause197.marbsocc;
 
+import android.graphics.Canvas;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
@@ -28,12 +29,21 @@ public class MainThread extends Thread {
 
     @Override
     public void run() {
-        long tickCount = 0L;
+        Canvas canvas;
         Log.d(TAG, "Starting game loop");
         while (running) {
-            tickCount++;
+            canvas = null;
+            try {
+                canvas = this.surfaceHolder.lockCanvas();
+                synchronized (surfaceHolder) {
+                    this.gamePanel.draw(canvas);
+                }
+            } finally {
+                if (canvas != null) {
+                    surfaceHolder.unlockCanvasAndPost(canvas);
+                }
+            }
 
         }
-        Log.d(TAG, "Game Loop Executed " + tickCount + " times");
     }
 }
