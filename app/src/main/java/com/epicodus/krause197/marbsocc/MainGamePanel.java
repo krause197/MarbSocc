@@ -11,6 +11,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.epicodus.krause197.marbsocc.models.Ball;
+import com.epicodus.krause197.marbsocc.models.components.Speed;
 
 /**
  * Created by Guest on 12/19/16.
@@ -84,10 +85,26 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
         return true;
     }
 
-    @Override
-    protected void onDraw(Canvas canvas) {
+
+    protected void render(Canvas canvas) {
         canvas.drawColor(Color.BLACK);
         ball.draw(canvas);
 
+    }
+
+    public void update() {
+        if (ball.getSpeed().getxDirection() == Speed.DIRECTION_RIGHT && ball.getX() + ball.getBitmap().getWidth() / 2 >= getWidth()) {
+            ball.getSpeed().toggleXDirection();
+        }
+        if (ball.getSpeed().getxDirection() == Speed.DIRECTION_LEFT && ball.getX() - ball.getBitmap().getWidth() / 2 <= 0) {
+            ball.getSpeed().toggleXDirection();
+        }
+        if (ball.getSpeed().getyDirection() == Speed.DIRECTION_DOWN && ball.getY() + ball.getBitmap().getHeight() / 2 >= getHeight()) {
+            ball.getSpeed().toggleYDirection();
+        }
+        if (ball.getSpeed().getyDirection() == Speed.DIRECTION_UP && ball.getY() - ball.getBitmap().getHeight() / 2 <= 0) {
+            ball.getSpeed().toggleYDirection();
+        }
+        ball.update();
     }
 }

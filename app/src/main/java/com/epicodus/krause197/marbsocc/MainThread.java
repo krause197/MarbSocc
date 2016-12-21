@@ -13,6 +13,9 @@ public class MainThread extends Thread {
     private SurfaceHolder surfaceHolder;
     private MainGamePanel gamePanel;
     private boolean running;
+    private final static int MAX_FPS = 50;
+    private final static int MAX_FRAME_SKIPS = 5;
+    private final static int FRAME_PERIOD = 1000 / MAX_FPS;
 
     public void setRunning(boolean running) {
         this.running = running;
@@ -37,7 +40,7 @@ public class MainThread extends Thread {
                 canvas = this.surfaceHolder.lockCanvas();
                 synchronized (surfaceHolder) {
                     this.gamePanel.update();
-                    this.gamePanel.onDraw(canvas);
+                    this.gamePanel.render(canvas);
                 }
             } finally {
                 if (canvas != null) {
