@@ -120,6 +120,6 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
         if (ball.getSpeed().getyDirection() == Speed.DIRECTION_UP && ball.getY() - ball.getBitmap().getHeight() / 2 <= 0) {
             ball.getSpeed().toggleYDirection();
         }
-        ball.update();
+        ball.update(System.currentTimeMillis());
     }
 }
