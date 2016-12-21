@@ -34,13 +34,36 @@ public class MainThread extends Thread {
     public void run() {
         Canvas canvas;
         Log.d(TAG, "Starting game loop");
+        long beginTime;
+        long timeDiff;
+        int sleepTime;
+        int framesSkipped;
+
+        sleepTime = 0;
+
         while (running) {
             canvas = null;
             try {
                 canvas = this.surfaceHolder.lockCanvas();
                 synchronized (surfaceHolder) {
+                    beginTime = System.currentTimeMillis();
+                    framesSkipped = 0;
                     this.gamePanel.update();
                     this.gamePanel.render(canvas);
+                    timeDiff = System.currentTimeMillis() - beginTime;
+                    sleepTime = (int) (FRAME_PERIOD - timeDiff);
+
+                    if (sleepTime > 0) {
+                        try {
+                            Thread.sleep(sleepTime);
+                        } catch (InterruptedException e) {
+                        }
+                    }
+                    while (sleepTime < 0 && framesSkipped < MAX_FRAME_SKIPS) {
+                        this.gamePanel.update();
+                        sleepTime += FRAME_PERIOD;
+                        framesSkipped++;
+                    }
                 }
             } finally {
                 if (canvas != null) {
