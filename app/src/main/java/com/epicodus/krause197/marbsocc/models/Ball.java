@@ -13,7 +13,7 @@ public class Ball {
     private int y;
     private boolean touched;
 
-    private Ball (Bitmap bitmap, int x, int y) {
+    public Ball (Bitmap bitmap, int x, int y) {
         this.bitmap = bitmap;
         this.x = x;
         this.y = y;
@@ -31,7 +31,7 @@ public class Ball {
         return x;
     }
 
-    public void setX() {
+    public void setX(int x) {
         this.x = x;
     }
 
@@ -39,7 +39,7 @@ public class Ball {
         return y;
     }
 
-    public void setY() {
+    public void setY(int y) {
         this.y = y;
     }
 
@@ -57,7 +57,7 @@ public class Ball {
 
     public void handleActionDown(int eventX, int eventY) {
         if (eventX >= (x - bitmap.getWidth() / 2) && (eventX <= (x + bitmap.getWidth() / 2))) {
-            if (eventY >= (y - bitmap.getHeight() / 2) && (eventY <= (y + bitmap.getHeight() / 2))) {
+            if (eventY >= (y - bitmap.getHeight() / 2) && (y <= (y + bitmap.getHeight() / 2))) {
                 setTouched(true);
             } else {
                 setTouched(false);
