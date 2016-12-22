@@ -28,7 +28,7 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
     public MainGamePanel (Context context) {
         super(context);
         getHolder().addCallback(this);
-        ball = new Ball(BitmapFactory.decodeResource(getResources(), R.mipmap.ball), 50, 50);
+        ball = new Ball(BitmapFactory.decodeResource(getResources(), R.drawable.ui_ball), 10, 50, 100, 40, 10, 4);
         thread = new MainThread(getHolder(), this);
         setFocusable(true);
     }
