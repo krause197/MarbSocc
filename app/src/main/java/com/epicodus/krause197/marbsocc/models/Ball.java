@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
+import com.epicodus.krause197.marbsocc.Accelerometer;
 import com.epicodus.krause197.marbsocc.models.components.Speed;
 
 /**
@@ -22,13 +23,25 @@ public class Ball {
     private int x;
     private int y;
     private boolean touched;
-    private Speed speed;
+//    private Speed speed;
+    public float[] acceleration = new float[3];
+    public float[] speed = new float[3];
+    public float[] position = new float[3];
+    public float radius;
+    public float screenWidth;
+    public float screenHeight;
+
 
     public Ball (Bitmap bitmap, int x, int y, int width, int height, int fps, int frameCount) {
         this.bitmap = bitmap;
         this.x = x;
         this.y = y;
-        speed = new Speed();
+        for (int i = 0; i <= 2; i++) {
+            position[i] = 0f;
+            speed[i] = 0f;
+            acceleration[i]= 0f;
+        }
+        radius = 0f;
         currentFrame = 0;
         frameNr = frameCount;
         spriteWidth = bitmap.getWidth() / frameCount;
@@ -75,8 +88,37 @@ public class Ball {
         canvas.drawBitmap(bitmap, sourceRect, destRect, null);
     }
 
-    public Speed getSpeed() {
-        return speed;
+    public void setSpeed(float vx, float vy, float vz) {
+        speed[0] = vx;
+        speed[1] = vy;
+        speed[2] = vz;
+    }
+
+    public void setPosition(float x, float y, float z) {
+        position[0] = x;
+        position[1] = y;
+        position[2] = z;
+    }
+
+    public void setAcceleration(float ax, float ay, float az) {
+        acceleration[0] = ax;
+        acceleration[1] = ay;
+        acceleration[2] = az;
+    }
+
+    public void addAcceleration(float x, float y, float z) {
+        acceleration[0] += x;
+        acceleration[1] += y;
+        acceleration[2] += z;
+    }
+
+    public void setRadius(float value) {
+        radius = value;
+    }
+
+    public void setBoundary(int width, int height) {
+        this.screenHeight = height;
+        this.screenWidth = width;
     }
 
     public void handleActionDown(int eventX, int eventY) {

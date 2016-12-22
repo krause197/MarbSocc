@@ -2,6 +2,7 @@ package com.epicodus.krause197.marbsocc;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -23,6 +24,8 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
     private MainThread thread;
     private Ball ball;
     private String avgFps;
+    private Bitmap mFinalbitmap = BitmapFactory.decodeResource(getResources(), R.drawable.field);
+
 
 
     public MainGamePanel (Context context) {
@@ -94,9 +97,11 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
 
 
     public void render(Canvas canvas) {
-        canvas.drawColor(Color.BLACK);
+        canvas.drawColor(Color.TRANSPARENT);
         ball.draw(canvas);
+        canvas.drawBitmap(mFinalbitmap, 0, 0, null);
         displayFps(canvas, avgFps);
+
     }
 
     private void displayFps(Canvas canvas, String fps) {
