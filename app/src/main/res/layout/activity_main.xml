@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.epicodus.krause197.marbsocc.MainActivity"
-    android:background="@drawable/field">
+    tools:context="com.epicodus.krause197.marbsocc.MainActivity">
+    <!--android:background="@drawable/field"-->
 
     <TextView
         android:layout_width="match_parent"

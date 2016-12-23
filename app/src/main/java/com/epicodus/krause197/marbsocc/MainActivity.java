@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(new MainGamePanel(this));
         accelerometer = new Accelerometer();
-        accelerometer.resume(this);
+//        accelerometer.resume(this);
         Log.d(TAG, "View Added");
     }
 

@@ -24,14 +24,14 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
     private MainThread thread;
     private Ball ball;
     private String avgFps;
-    private Bitmap mFinalbitmap = BitmapFactory.decodeResource(getResources(), R.drawable.field);
+//    private Bitmap mFinalbitmap = BitmapFactory.decodeResource(getResources(), R.drawable.field);
 
 
 
     public MainGamePanel (Context context) {
         super(context);
         getHolder().addCallback(this);
-        ball = new Ball(BitmapFactory.decodeResource(getResources(), R.drawable.ui_ball), 10, 50, 100, 40, 10, 4);
+        ball = new Ball(BitmapFactory.decodeResource(getResources(), R.drawable.ui_ball), 10, 50, 100, 40, 8, 4);
         thread = new MainThread(getHolder(), this);
         setFocusable(true);
     }
@@ -97,9 +97,10 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
 
 
     public void render(Canvas canvas) {
-        canvas.drawColor(Color.TRANSPARENT);
+        canvas.drawColor(Color.BLACK);
         ball.draw(canvas);
-        canvas.drawBitmap(mFinalbitmap, 0, 0, null);
+//        canvas.scale(1, 0);
+//        canvas.drawBitmap(mFinalbitmap, 0, 0, null);
         displayFps(canvas, avgFps);
 
     }

@@ -5,8 +5,8 @@ package com.epicodus.krause197.marbsocc.models.components;
  */
 public class Speed {
     public static final int DIRECTION_RIGHT = 1;
-    public static final int DIRECTION_LEFT = 1;
-    public static final int DIRECTION_UP = 1;
+    public static final int DIRECTION_LEFT = -1;
+    public static final int DIRECTION_UP = -1;
     public static final int DIRECTION_DOWN = 1;
 
     private float xv = 1;
@@ -16,8 +16,8 @@ public class Speed {
     private int yDirection = DIRECTION_DOWN;
 
     public Speed() {
-        this.xv = 2;
-        this.yv = 2;
+        this.xv = 15;
+        this.yv = 15;
     }
 
     public Speed(float xv, float yv) {
